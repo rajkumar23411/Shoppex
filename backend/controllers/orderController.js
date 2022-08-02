@@ -62,13 +62,13 @@ exports.allOrders = catchAsycErrors(async (req, res, next) => {
    orders.forEach((order) => {
       totalIncome += order.totalPrice;
    });
+
    res.status(200).json({ totalIncome, orders });
 });
 
 // update order status (ADMIN Only)
 exports.updateOrderStatus = catchAsycErrors(async (req, res, next) => {
-   const order = await Order.findById(req.params.id);
-
+   const order = await Order.findById(req.params.id).populate("user", "name email");
    if (!order) {
       return next(new ErrorHandler("Order not found", 404));
    }
@@ -78,17 +78,30 @@ exports.updateOrderStatus = catchAsycErrors(async (req, res, next) => {
    }
 
    if(req.body.status === "Shipped"){
-      order.orderItems.forEach(async (order) => {
-         await updateStock(order.product, order.quantity);
+      order.orderItems.forEach(async (or) => {
+         await updateStock(or.product, or.quantity);
       });
+      let shippingMessage = `Hello there ${order.user.name}.\n\nYour order of ORDER ID ${order._id} has been shipped today. And will be delivered soon. Thank you for your patients.`;
+      await sendEmail({
+         email: order.user.email,
+         subject: `Order Delivery Update`,
+         message: shippingMessage
+      })
    }
 
    order.orderStatus = req.body.status;
 
    if (req.body.status === "Delivered") {
       order.deliveredAt = Date.now();
+      const deliverMessage = `Hello there ${order.user.name}.\n\nYour order of ORDER ID ${order._id} has delivered today. Thank you for shopping with us.\n\n\nWith regards\nTeam Shoppex.`;
+      await sendEmail({
+         email: order.user.email,
+         subject: `Order Delivery Update`,
+         message: deliverMessage
+      })
    }
    await order.save({ validateBeforeSave: false });
+   
    res.status(200).json({ order, success: true });
 });
 async function updateStock(productID, qty) {

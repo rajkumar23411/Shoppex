@@ -74,7 +74,7 @@ const AllOrders = () => {
                           {order.orderStatus}
                         </th>
                         <td>{order.orderItems.length}</td>
-                        <td>Rs. {order.totalPrice}.00</td>
+                        <td>Rs. {order.totalPrice}</td>
                         <td>{order.paymentInfo.status}</td>
                         <td>
                           <Link to={`/admin/order/${order._id}`}>

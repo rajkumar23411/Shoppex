@@ -9,7 +9,7 @@ const About = () => {
         <div className="page-heading"><h3>About the developer</h3></div>
         <div className="about-me">
           <div className="img-div">
-            <img src="./me.jpg" alt="me" className='me' />
+            <img src="./blank-user.png" alt="me" className='me' />
           </div>
           <div className="about-para">
             <h4>Hey there! <span>I’m Rajkumar</span>, nice to meet you. Thank you for visiting the protal.</h4>

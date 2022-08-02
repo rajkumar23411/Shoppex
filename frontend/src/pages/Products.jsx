@@ -123,7 +123,7 @@ const Products = () => {
                       value={price}
                       onChange={priceHanlder}
                       valueLabelDisplay="auto"
-                      // aria-labelledby="range-slider"
+                      aria-labelledby="range-slider"
                       min={0}
                       max={8000}
                     /> 
@@ -144,7 +144,7 @@ const Products = () => {
               </div>
               <div className="all-products">
                 {products &&
-                  products.map((product) => (
+                  products.sort(()=> Math.random() - 0.5).map((product) => (
                     <SingleProuct product={product} key={product._id} />
                   ))}
               </div>

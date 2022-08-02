@@ -3,14 +3,17 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cloudinary = require('cloudinary');
 const DatabaseConnection = require("./database/db");
+
 //dotenv
 dotenv.config({ path: "config/config.env" });
+
 //handling uncaught error
 process.on("uncaughtException", (err) => {
    console.log(`Error: ${err.message}`);
    console.log(`Server has been closed`);
    process.exit(1);
 });
+
 //database
 DatabaseConnection();
 cloudinary.config({

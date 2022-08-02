@@ -55,6 +55,10 @@ const SingleProductPage = () => {
     open ? setOpen(false) : setOpen(true);
   }
 
+  const reviewCancelHandler = () => {
+    setOpen(false);
+  }
+
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
 
@@ -63,7 +67,6 @@ const SingleProductPage = () => {
     myForm.set("productID", id);
 
     dispatch(newReview(myForm));
-    console.log(myForm);
     setOpen(false);
   }
 
@@ -126,8 +129,8 @@ const SingleProductPage = () => {
                 )}
                  <div className="add-review-btn" onClick={submitReviewToggle}>Add a review</div>
                 <div className="price-block">₹{product.price}</div>
-                <div className={product.stock <= 1 ? "productStockRed" : "productStockGreen"}>
-                  {product.stock > 1 ? "Product in stock":"Temporarily out of stock" }
+                <div className={product.stock < 1 ? "productStockRed" : "productStockGreen"}>
+                  {product.stock < 1 ? "Temporarily out of stock" : "Product in stock"}
                 </div>
                 <div className="cart-block">
                   <div className="minus" onClick={descreaseQty}>
@@ -139,7 +142,7 @@ const SingleProductPage = () => {
                   </div>
                 </div>
                 <div className="add-to-cart-btn">
-                  <button disabled={product.stock < 1 ? true : false} onClick={addToCartHandler}>Add to Cart</button>
+                  <button disabled={product.stock === 0 ? true : false} onClick={addToCartHandler}>Add to Cart</button>
                 </div>
               </div>
 
@@ -173,7 +176,7 @@ const SingleProductPage = () => {
                   <textarea className="reviewCommentArea" cols="40" rows="5" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Write here your valuable comment"></textarea>
                 </DialogContent>
                 <DialogActions className="dialog-btns">
-                  <Button color="secondary" variant="outlined">Cancel</Button>
+                  <Button color="secondary" variant="outlined" onclick={reviewCancelHandler}>Cancel</Button>
                   <Button color="primary" variant="outlined" onClick={reviewSubmitHandler}>Submit</Button>
                 </DialogActions>
               </Dialog>

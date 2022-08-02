@@ -32,8 +32,8 @@ const Footer = () => {
                   <Link to="/my_account" style={{"color":"unset"}}><li>Account</li></Link>
                   <Link to="/cart" style={{"color":"unset"}}>Cart</Link>
                   <Link to="/orders" style={{"color":"unset"}}>Orders</Link>
-                  <li>Payments</li>
-                  <li>Inclusive Sizing</li>
+                  <Link to="/payment" style={{"color":"unset"}}><li>Payments</li></Link>
+                  <Link to="/sizing"><li>Inclusive Sizing</li></Link>
                </ul>
             </div>
             <div className="newsLetter">

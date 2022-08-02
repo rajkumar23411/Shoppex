@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Loader from "../components/loader";
 import "../App.css";
 import { useState } from "react";
@@ -17,7 +15,7 @@ const Register = () => {
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
-  const [user, setUser] = useState({ name: " ", email: " ", password: " " });
+  const [user, setUser] = useState({ name: "", email: "" , password: "" });
   const { name, email, password } = user;
   const [avatar, setAvatar] = useState("/blank-user.png");
   const [avatarPreview, setAvatarPreview] = useState("/blank-user.png");
@@ -63,7 +61,6 @@ const Register = () => {
         <Loader />
       ) : (
         <>
-          <Navbar />
           <div className="forms">
             <form encType="multipart/form-data" onSubmit={registerSubmit}>
               <div className="form-heading">
@@ -84,6 +81,7 @@ const Register = () => {
                   name="name"
                   value={name}
                   onChange={registerDataChange}
+                  autoComplete="false"
                   required
                 />
               </div>
@@ -132,7 +130,6 @@ const Register = () => {
               <h3>Join us now & Enjoy your shopping</h3>
             </div>
           </div>
-          <Footer />
         </>
       )}
     </>

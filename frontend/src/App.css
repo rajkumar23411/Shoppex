@@ -1289,15 +1289,18 @@ line-height: 22px;
   background: rgba(0, 0, 0, 0.8) !important;
 }
 .productDetailsCard .carousel .slide img {
-  width: 20rem !important;
+  width: 22rem !important;
   vertical-align: top;
   border: 0;
   height: min-content !important;
 }
+.productDetailsCard .productImage .carouselImage img:hover{
+  transform: scale(1.3) !important;
+}
 .productDetailsCard .carousel .thumb img {
   vertical-align: top;
   /* height: 100%; */
-  width: 65% !important;
+  width: 80% !important;
 }
 .productDetailsCard > div:last-child{
   display: flex;
