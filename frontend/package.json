@@ -13,6 +13,7 @@
       "axios": "^0.27.2",
       "chart.js": "^3.8.2",
       "country-state-city": "^3.0.1",
+      "npm": "^8.15.1",
       "react": "^18.2.0",
       "react-alert": "^7.0.3",
       "react-alert-template-basic": "^1.0.2",
